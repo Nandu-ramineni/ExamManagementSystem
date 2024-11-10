@@ -5,7 +5,7 @@ The Employee Management System (EMS) is a web-based application designed to mana
 
 ## Features
 - Employee record management
-- Attendance tracking
+- Attendance tracking 
 - Payroll management
 - Role-based access control
 - Reporting and analytics
