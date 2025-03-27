@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { UserLogin } from "../../services/api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; 
 import {jwtDecode} from 'jwt-decode';
@@ -63,7 +63,7 @@ const Login = () => {
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
             <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
-                <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100">Login</h2>
+                <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100">EduPortal</h2>
 
                 {/* Error Message */}
                 {error && (
@@ -115,14 +115,14 @@ const Login = () => {
                     </button>
                 </form>
                 
-                <div className="text-center">
+                {/* <div className="text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         Don{"'"}t have an account?{" "}
                         <Link to="/signup" className="text-indigo-600 dark:text-indigo-400 hover:underline">
                             Sign up
                         </Link>
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
     );
