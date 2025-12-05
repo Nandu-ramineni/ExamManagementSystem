@@ -19,7 +19,7 @@ app.use('/api/exams', examRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/results', resultRoutes);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5001;
 
 connectDB();
 

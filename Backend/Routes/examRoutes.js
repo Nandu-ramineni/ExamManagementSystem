@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { auth } from '../Middlewares/authMiddleware.js';
-import { createExam, deleteExam, getExam, getExams, updateExam } from '../controllers/examController.js';
+import { createExam, deleteExam, getExam, getExams, updateExam } from '../Controllers/examController.js';
 
 
 const router = express.Router();

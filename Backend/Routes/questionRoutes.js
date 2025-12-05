@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { auth } from '../Middlewares/authMiddleware.js';
-import { addQuestion, deleteQuestion, getQuestion, getQuestions, getQuestionsByExam, updateQuestion } from '../controllers/questionController.js';
+import { addQuestion, deleteQuestion, getQuestion, getQuestions, getQuestionsByExam, updateQuestion } from '../Controllers/questionController.js';
 
 const router = express.Router();
 router.post('/add', auth, addQuestion);
