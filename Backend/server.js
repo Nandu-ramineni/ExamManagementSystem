@@ -24,8 +24,13 @@ const PORT = process.env.PORT || 5001;
 connectDB();
 
 app.get('/', (req, res) => {
-    res.send('Hello From EMS Backend');
+    res.send('You have reached the EMS Backend Server');
 });
+
+app.get('api/health', (req, res) => {
+    res.status(200).send('API is healthy');
+}
+)
 
 app.listen(PORT, '::',() => {
     console.log(`Server is running on http://localhost:${PORT}`);

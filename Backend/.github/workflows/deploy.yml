@@ -1,40 +1,28 @@
-name: CI/CD Deploy to AWS ECS
+name: Deploy Backend to AWS EC2
 
 on:
   push:
-    branches: 
-      - main
+    branches:
+      - main   # deploy when pushing to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.7.0
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push image to ECR
+      - name: Deploy to EC2
         run: |
-          IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest"
-          docker build -t $IMAGE_URI .
-          docker push $IMAGE_URI
-        env:
-          DOCKER_BUILDKIT: 1
-
-      - name: Force ECS service update to deploy new image
-        run: |
-          aws ecs update-service \
-            --cluster ${{ secrets.ECS_CLUSTER }} \
-            --service ${{ secrets.ECS_SERVICE }} \
-            --force-new-deployment
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            cd ~/YOUR_REPO
+            git pull origin main
+            npm install --production
+            pm2 restart backend
+          EOF
