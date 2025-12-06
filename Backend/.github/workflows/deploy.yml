@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/YOUR_REPO
+            cd ~/ExamManagementSystem
             git pull origin main
             npm install --production
             pm2 restart backend
